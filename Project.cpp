@@ -16,7 +16,6 @@ Player *myPlayer;
 objPos myPos;
 
 
-bool exitFlag;
 
 void Initialize(void);
 void GetInput(void);
@@ -71,6 +70,8 @@ void RunLogic(void)
 {
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
+
+    myGM -> clearInput();
 }
 
 

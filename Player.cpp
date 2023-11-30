@@ -37,7 +37,6 @@ void Player::updatePlayerDir()
     {
         case 27:
             mainGameMechsRef->setExitTrue();
-            //MacUILib_printf("EXIT");
             break;
         case 'w':
         case 'W':
