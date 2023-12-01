@@ -2,9 +2,13 @@
 #include "MacUILib.h"
 
 
+
+
 GameMechs::GameMechs()
 {
    //Default game mode
+
+
 
 
    input = 0; //nothing comes in
@@ -15,22 +19,27 @@ GameMechs::GameMechs()
 }
 
 
+
+
 GameMechs::GameMechs(int boardX, int boardY)
 {
-    input = 0; //nothing comes in 
-    exitFlag = false;
-    boardSizeX = boardX;
-    boardSizeY = boardY;
+   input = 0; //nothing comes in
+   exitFlag = false;
+   boardSizeX = boardX;
+   boardSizeY = boardY;
+   score = 0;
 }
+
+
+
+
+
+
 
 
 // do you need a destructor?
 
-GameMechs::~GameMechs() //Destructor ( we don't need yet until there is a heap member
-{
-   //maybe myGM???
-   //maybe myPlayer???
-}
+
 
 
 GameMechs::~GameMechs() //Destructor ( we don't need yet until there is a heap member
@@ -44,15 +53,18 @@ GameMechs::~GameMechs() //Destructor ( we don't need yet until there is a heap m
 
 
 
+
+
+
+
+
+
 bool GameMechs::getExitFlagStatus()
 {
-    return exitFlag;
+   return exitFlag;
 }
 
-bool GameMechs::getLoseFlagStatus()
-{
-    return loseFlag;
-}
+
 
 
 bool GameMechs::getLoseFlagStatus()
@@ -61,53 +73,75 @@ bool GameMechs::getLoseFlagStatus()
 }
 
 
+
+
 char GameMechs::getInput()
 {
-    if(MacUILib_hasChar())
-    {
-        input = MacUILib_getChar();
-    }
+   if(MacUILib_hasChar())
+   {
+       input = MacUILib_getChar();
+   }
 
-    return input;
+
+
+
+   return input;
 }
+
+
 
 
 int GameMechs::getBoardSizeX()
 {
-    return boardSizeX;
+   return boardSizeX;
 }
+
+
 
 
 int GameMechs::getBoardSizeY()
 {
-    return boardSizeY;
+   return boardSizeY;
 }
 char GameMechs::getScore()
 {
-    return score;
+   return score;
 }
+
+
+
 
 void GameMechs::setExitTrue()
 {
-    exitFlag = true;
+   exitFlag = true;
 }
+
+
+
 
 void GameMechs::setLoseFlag()
 {
-    loseFlag = true;
+   loseFlag = true;
 }
 void GameMechs::setInput(char this_input)
 {
-    input = this_input;
+   input = this_input;
 }
+
+
 
 
 void GameMechs::clearInput()
 {
-    input = 0;
+   input = 0;
 }
+
+
+
 
 void GameMechs::incrementScore()
 {
-    score++;
+   score++;
 }
+
+
