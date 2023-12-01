@@ -126,6 +126,7 @@ void Player::movePlayer()
    int y = mainGameMechsRef->getBoardSizeY();
    objPos currHead;
    objPos foodPos;
+   objPos currElm;
    
    
    playerPosList->getHeadElement(currHead);
@@ -172,11 +173,30 @@ void Player::movePlayer()
            break;
    }
 
+    // if(currHead.checkSelfCollision())
+    // {
+    //     mainGameMechsRef->setLoseFlag();
+    //     mainGameMechsRef->setExitTrue();
+    // }
+
+    for(int m =1; m<playerPosList->getSize();m++)
+    {
+        playerPosList->getElement(currElm,m);
+        if(currHead.isPosEqual(&currElm))
+        {
+            mainGameMechsRef->setLoseFlag();
+            mainGameMechsRef->setExitTrue();
+        }
+    }
+
+  
+
    if(currHead.isPosEqual(&foodPos))
    {
         playerPosList->insertHead(currHead);
         myObject->generateFood(playerPosList);
         //MacUILib_printf("Passed!");
+        mainGameMechsRef->incrementScore();
 
    }
    else
@@ -185,14 +205,24 @@ void Player::movePlayer()
         playerPosList->removeTail();
    }
 
-   for(int j = 0; j < playerPosList->getSize(); j++)
-   {
-        mainGameMechsRef->incrementScore();
-   }
+  
     // playerPosList->insertHead(currHead);
     // playerPosList->removeTail();
 
 
 }
 
+// bool Player::checkSelfCollision()
+// {
+//     objPos currElm;
+//     objPos currHead;
+//     for(int m =1; m<playerPosList->getSize();m++)
+//     {
+//         playerPosList->getElement(currElm,m);
+//         if(currHead.isPosEqual(&currElm))
+//         {
+//            return true;
+//         }
+//     }
+// }
 

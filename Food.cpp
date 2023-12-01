@@ -40,48 +40,63 @@ objPosArrayList* Food::generateFood(objPosArrayList* playerPosList)
     //remember, in objPos class you have an isPosEqual() method. Use this insead of
     //comparing element by element for your convenience
 
+    int x,y;
 
-    // int x, y;
-
-
-    // do
-    // {
-    //     srand(time(NULL));
-
-
-    //     foodPos.x = (rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1);
-    //     foodPos.y = (rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1);
-       
-    // }
-    // while(foodPos.isPosEqual(&blockOff));
-    objPos currElm;
-    //objPosArrayList playerList;
-    int x, y;
-    //playerList = playerPosList;
-    //playerList->getHeadElement(currHead);
     bool overlap;
+    objPos currentElm;
 
     do
     {
-        overlap = true;
         srand(time(NULL));
+        overlap = false;
 
-        x = (rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1);
-        y = (rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1);
+        foodPos.x = (rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1);
+        foodPos.y = (rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1);
 
-        foodPos.setObjPos(x, y, 'o'); // Update food position
-        for(int i = 0; i< playerPosList->getSize();i++)
+        for(int i = 0; i < playerPosList -> getSize(); i++)
         {
-            playerPosList->getElement(currElm, i);
-            if(currElm.isPosEqual(&foodPos))
+            playerPosList -> getElement(currentElm, i);
+            if(currentElm.isPosEqual(&foodPos))
             {
-                overlap =false;
+                overlap = true;
+                break;
             }
         }
-    }
-    while(overlap); //foodPos.isPosEqual(&blockOff)
+    } while(overlap);
+   
+    // objPos currElm;
+    // //objPosArrayList playerList;
+    // int x, y;
+    // //playerList = playerPosList;
+    // //playerList->getHeadElement(currHead);
+    // bool overlap = true;
+
+    // if (foodPos.isPosEqual(&currElm))
+    // {
+    //     while(overlap)
+    //     {
+    //         overlap = false;
+    //         srand(time(NULL));
+
+    //         x = (rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1);
+    //         y = (rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1);
+
+    //         foodPos.setObjPos(x, y, 'o'); // Update food position
+    //         for(int i = 0; i< playerPosList->getSize();i++)
+    //         {
+    //             playerPosList->getElement(currElm, i);
+    //             if(currElm.isPosEqual(&foodPos))
+    //             {
+    //                 overlap = true;
+    //             }
+    //         }
+    //     }
+    // }
+    
+    //while(overlap); //foodPos.isPosEqual(&blockOff)
 
 
+///////////
     // playerDir->getPlayerPos(blockOff);
 
 

@@ -93,24 +93,11 @@ int main(void)
        DrawScreen();
        LoopDelay();
    }
+   
 
+  
 
-
-
-
-
-
-
-   CleanUp();
-
-
-
-
-
-
-
-
-}
+  CleanUp();}
 
 
 
@@ -121,7 +108,7 @@ void Initialize(void)
    MacUILib_clearScreen();
 
    //PPA3
-   //score = 0;
+   //int score = 0;
    //
 
 
@@ -136,10 +123,17 @@ void Initialize(void)
 
    srand(time(NULL));
 
+   objPosArrayList* playerBody = myPlayer->getPlayerPos();
+   objPos FoodPos;
+
+   if(playerBody != nullptr)
+   {
+      myFood->generateFood(playerBody);
+   }
    //Debug!!! delete these three lines (these are only for debug during feature 1)
-   objPos tempPos{-1,-1,'o'};
-   myPlayer->getPlayerPos();
-   myFood->generateFood(myPlayer->getPlayerPos());
+   // objPos tempPos{-1,-1,'o'};
+   // myPlayer->getPlayerPos();
+   // myFood->generateFood(myPlayer->getPlayerPos());
 
 
    //think about when to generate the new food...
@@ -216,6 +210,7 @@ void RunLogic(void)
 
 
 
+
     myGM -> clearInput();
 
    
@@ -236,6 +231,7 @@ void DrawScreen(void)
    objPosArrayList* playerBody = myPlayer->getPlayerPos();
    objPos tempBody;
    bool drawn; 
+   
 
    // objPos tempPos;
    // myPlayer->getPlayerPos(tempPos); //get the player pos.
@@ -289,17 +285,27 @@ void DrawScreen(void)
    //                 myGM->getBoardSizeX(), myGM->getBoardSizeY(),
    //                 tempPos.x, tempPos.y, tempPos.symbol, myGM->getScore());
    MacUILib_printf("Score: %d\n", myGM->getScore());
+   playerBody->getHeadElement(tempBody);
+   MacUILib_printf("Player Head Position: <%d,%d>\n", tempBody.x, tempBody.y);
    //MacUILib_printf("Player positions:\n");
-   for(int l =0; l <playerBody->getSize(); l++)
-   {
-      playerBody->getElement(tempBody,l);
-      MacUILib_printf("Player positions: <%d,%d>",tempBody.x,tempBody.y);
-   }
+   // for(int l =0; l <playerBody->getSize(); l++)
+   // {
+   //    playerBody->getHeadElement();
+   //    MacUILib_printf("Player positions: <%d,%d>",tempBody.x,tempBody.y);
+   // }
 
-   MacUILib_printf("Food position: <%d,%d>\n",tempFoodPos.x, tempFoodPos.y);
+   // MacUILib_printf("\nFood position: <%d,%d>\n",tempFoodPos.x, tempFoodPos.y);
+
+
+  
    
 
-
+   if(myGM->getLoseFlagStatus() == true)
+   {
+      MacUILib_clearScreen(); 
+      MacUILib_printf("LOSER!!!\n");
+   }
+   
 
 }
 
@@ -312,16 +318,8 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-   MacUILib_clearScreen();  
+   //MacUILib_clearScreen();  
    MacUILib_uninit();
-
-
-
-
-
-
-
-
    delete myGM;
    delete myPlayer;
    delete myFood;
