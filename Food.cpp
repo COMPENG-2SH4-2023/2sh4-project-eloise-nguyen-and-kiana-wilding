@@ -1,7 +1,7 @@
 #include "Food.h"
 #include "MacUILib.h"
-#include "GameMechs.h"
-#include "objPos.h"
+
+
 
 
 #include <iostream>
@@ -17,18 +17,22 @@ Food::Food(GameMechs *thisGMRef)
     //constructor
     foodPos.setObjPos(-1, -1, 'o'); //initialize foodPos outside of the game board (so to not be displayed)
     mainGameMechsRef = thisGMRef;
+
+    playerPosList = new objPosArrayList();
 }
 
 
 Food::~Food()
 {
     //destructor
+    delete playerPosList;
 
 
 }
 
 
-void Food::generateFood(objPos blockOff)
+//void Food::generateFood(objPos blockOff)
+objPosArrayList* Food::generateFood(objPosArrayList* playerPosList)
 {
     //generate food from PPA3
     //generate random x and y coord, and make sure they are NOT boarder or blockOff pos
@@ -37,19 +41,45 @@ void Food::generateFood(objPos blockOff)
     //comparing element by element for your convenience
 
 
-    int x, y;
+    // int x, y;
 
+
+    // do
+    // {
+    //     srand(time(NULL));
+
+
+    //     foodPos.x = (rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1);
+    //     foodPos.y = (rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1);
+       
+    // }
+    // while(foodPos.isPosEqual(&blockOff));
+    objPos currElm;
+    //objPosArrayList playerList;
+    int x, y;
+    //playerList = playerPosList;
+    //playerList->getHeadElement(currHead);
+    bool overlap;
 
     do
     {
+        overlap = true;
         srand(time(NULL));
 
+        x = (rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1);
+        y = (rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1);
 
-        foodPos.x = (rand() % (mainGameMechsRef->getBoardSizeX() - 2) + 1);
-        foodPos.y = (rand() % (mainGameMechsRef->getBoardSizeY() - 2) + 1);
-       
+        foodPos.setObjPos(x, y, 'o'); // Update food position
+        for(int i = 0; i< playerPosList->getSize();i++)
+        {
+            playerPosList->getElement(currElm, i);
+            if(currElm.isPosEqual(&foodPos))
+            {
+                overlap =false;
+            }
+        }
     }
-    while(foodPos.isPosEqual(&blockOff));
+    while(overlap); //foodPos.isPosEqual(&blockOff)
 
 
     // playerDir->getPlayerPos(blockOff);

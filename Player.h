@@ -7,6 +7,7 @@
 #include "GameMechs.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
+#include "Food.h"
 
 
 
@@ -34,7 +35,7 @@ class Player
 
 
 
-       Player(GameMechs* thisGMRef);
+       Player(GameMechs* thisGMRef, Food* myFood);
        ~Player();
 
 
@@ -61,8 +62,7 @@ class Player
        objPosArrayList *playerPosList;   // Upgrade this in iteration 3.      
        enum Dir myDir;
 
-
-
+       Food* myObject;
 
 
        // Need a reference to the Main Game Mechanisms

@@ -1,6 +1,8 @@
 
 #include "Player.h"
 #include "MacUILib.h"
+#include "Food.h"
+#include "objPosArrayList.h"
 
 
 
@@ -9,10 +11,11 @@
 
 
 
-Player::Player(GameMechs* thisGMRef)
+Player::Player(GameMechs* thisGMRef, Food* myFood)
 {
    mainGameMechsRef = thisGMRef;
    myDir = STOP;
+   myObject = myFood;
 
 
 
@@ -122,7 +125,11 @@ void Player::movePlayer()
    int x = mainGameMechsRef->getBoardSizeX();
    int y = mainGameMechsRef->getBoardSizeY();
    objPos currHead;
+   objPos foodPos;
+   
+   
    playerPosList->getHeadElement(currHead);
+   myObject->getFoodPos(foodPos);
 
 
    switch(myDir)
@@ -165,8 +172,25 @@ void Player::movePlayer()
            break;
    }
 
-   playerPosList->insertHead(currHead);
-   playerPosList->removeTail();
+   if(currHead.isPosEqual(&foodPos))
+   {
+        playerPosList->insertHead(currHead);
+        myObject->generateFood(playerPosList);
+        //MacUILib_printf("Passed!");
+
+   }
+   else
+   {
+        playerPosList->insertHead(currHead);
+        playerPosList->removeTail();
+   }
+
+   for(int j = 0; j < playerPosList->getSize(); j++)
+   {
+        mainGameMechsRef->incrementScore();
+   }
+    // playerPosList->insertHead(currHead);
+    // playerPosList->removeTail();
 
 
 }

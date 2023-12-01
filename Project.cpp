@@ -120,26 +120,35 @@ void Initialize(void)
    MacUILib_init();
    MacUILib_clearScreen();
 
-
+   //PPA3
    //score = 0;
+   //
 
 
 
 
    myGM = new GameMechs(30,15); //new heap
-   myPlayer = new Player(myGM); //new heap
+   //myPlayer = new Player(myGM, myFood); //new heap
    myFood = new Food(myGM); //new heap
+   myPlayer = new Player(myGM, myFood); //new heap
 
+   
 
    srand(time(NULL));
 
-
-   //objPos tempPos{-1,-1,'o'};
-   myPlayer->getPlayerPos(tempPos);
-   myFood->generateFood(tempPos);
+   //Debug!!! delete these three lines (these are only for debug during feature 1)
+   objPos tempPos{-1,-1,'o'};
+   myPlayer->getPlayerPos();
+   myFood->generateFood(myPlayer->getPlayerPos());
 
 
    //think about when to generate the new food...
+   //PPA3
+   // objPos foodtempPos;
+   // myPlayer->getPlayerPos();
+   // myFood->generateFood(returnPlayerPos);
+   //
+
 
 
    // remember generateFood() requires player reference. You will need to provide
@@ -173,13 +182,16 @@ void RunLogic(void)
 //    myPlayer->getPlayerPos(returnPlayerPos)
 
 
-//    objPos FoodPos;
-//    myFood->getFoodPos(FoodPos);
+   objPos FoodPos;
+   myFood->getFoodPos(FoodPos);
 
 
-   // objPos tempPos;
-   // myPlayer->getPlayerPos(tempPos); //get the player pos.
+   objPos tempPos;
+   myPlayer->getPlayerPos(); //get the player pos.
 
+   //PPA3
+   // objPos returnPlayerPos;
+   // myPlayer->getPlayerPos();
 
    // objPos foodPos;
    // myFood->getFoodPos(foodPos);
@@ -190,21 +202,22 @@ void RunLogic(void)
    //      myFood->generateFood(tempPos);
    //      myGM->incrementScore();
    // }
-
+   //
 
 
 
 
 
    
-//    objPos blockOff;
-//    myFood->generateFood(blockOff);
-//    //myFood->getFoodPos();
+   // objPos blockOff;
+   // myFood->generateFood(blockOff);
+   //myFood->getFoodPos();
 
 
 
 
     myGM -> clearInput();
+
    
 }
 
@@ -226,7 +239,10 @@ void DrawScreen(void)
 
    // objPos tempPos;
    // myPlayer->getPlayerPos(tempPos); //get the player pos.
-
+   //PPA3
+   // objPos FoodPos;
+   // myFood->getFoodPos(FoodPos);
+   //
 
    objPos tempFoodPos;
    myFood->getFoodPos(tempFoodPos);
@@ -273,11 +289,11 @@ void DrawScreen(void)
    //                 myGM->getBoardSizeX(), myGM->getBoardSizeY(),
    //                 tempPos.x, tempPos.y, tempPos.symbol, myGM->getScore());
    MacUILib_printf("Score: %d\n", myGM->getScore());
-   MacUILib_printf("Player positions:\n");
+   //MacUILib_printf("Player positions:\n");
    for(int l =0; l <playerBody->getSize(); l++)
    {
       playerBody->getElement(tempBody,l);
-      MacUILib_printf("<%d,%d>",tempBody.x,tempBody.y);
+      MacUILib_printf("Player positions: <%d,%d>",tempBody.x,tempBody.y);
    }
 
    MacUILib_printf("Food position: <%d,%d>\n",tempFoodPos.x, tempFoodPos.y);

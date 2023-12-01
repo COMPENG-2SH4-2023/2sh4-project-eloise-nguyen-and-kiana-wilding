@@ -21,12 +21,13 @@ class Food
     private:
         objPos foodPos;
         GameMechs* mainGameMechsRef;
+        objPosArrayList *playerPosList;
     public:
         Food(GameMechs *thisGMRef);
         ~Food();
 
-
-        void generateFood(objPos blockOff);
+        objPosArrayList* generateFood(objPosArrayList* playerPosList);
+        //void generateFood(objPos blockOff);
         void getFoodPos(objPos &returnPos);
 };
 
