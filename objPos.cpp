@@ -1,12 +1,16 @@
 #include "objPos.h"
 
 
+
+
 objPos::objPos()
 {
    x = 0;
    y = 0;
    symbol = 0; //NULL
 }
+
+
 
 
 objPos::objPos(objPos &o)
@@ -18,12 +22,17 @@ objPos::objPos(objPos &o)
 
 
 
+
+
+
 objPos::objPos(int xPos, int yPos, char sym)
 {
    x = xPos;
    y = yPos;
    symbol = sym;
 }
+
+
 
 
 void objPos::setObjPos(objPos o)
@@ -34,6 +43,8 @@ void objPos::setObjPos(objPos o)
 }
 
 
+
+
 void objPos::setObjPos(int xPos, int yPos, char sym)
 {
    x = xPos;
@@ -42,10 +53,14 @@ void objPos::setObjPos(int xPos, int yPos, char sym)
 }
 
 
+
+
 void objPos::getObjPos(objPos &returnPos)
 {
    returnPos.setObjPos(x, y, symbol);
 }
+
+
 
 
 char objPos::getSymbol()
@@ -54,10 +69,14 @@ char objPos::getSymbol()
 }
 
 
+
+
 bool objPos::isPosEqual(const objPos* refPos)
 {
    return (refPos->x == x && refPos->y == y);
 }
+
+
 
 
 char objPos::getSymbolIfPosEqual(const objPos* refPos)
@@ -67,3 +86,4 @@ char objPos::getSymbolIfPosEqual(const objPos* refPos)
    else
        return 0;
 }
+
