@@ -22,11 +22,6 @@ class GameMechs
 
    // Only some sample members are included here
 
-<<<<<<< HEAD
-
-   // You will include more data members and member functions to complete your design.
-
-=======
     private:
         char input;
         bool exitFlag;
@@ -52,7 +47,6 @@ class GameMechs
         void setInput(char this_input);
         void clearInput();
         void incrementScore();
->>>>>>> 9326ca0dedc180c54a65b7726c964f6cd51bf2ab
 
    private:
        char input;
