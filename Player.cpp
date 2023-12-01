@@ -18,11 +18,12 @@ Player::Player(GameMechs* thisGMRef)
 
 
 
+   objPos tempPos;
 
 
 
    // more actions to be included
-   playerPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,
+   tempPos.setObjPos(mainGameMechsRef->getBoardSizeX()/2,
                        mainGameMechsRef->getBoardSizeY()/2,
                        '*');
 
@@ -30,6 +31,15 @@ Player::Player(GameMechs* thisGMRef)
 
 
    //need heap member
+   playerPosList = new objPosArrayList();
+   playerPosList->insertHead(tempPos);
+
+   //DEBUG PURPOSE
+//    playerPosList->insertHead(tempPos);
+//    playerPosList->insertHead(tempPos);
+//    playerPosList->insertHead(tempPos);
+//    playerPosList->insertHead(tempPos);
+   
 }
 
 
@@ -38,15 +48,19 @@ Player::Player(GameMechs* thisGMRef)
 Player::~Player()
 {
    // delete any heap members here
+   //delete [] playerPosList;
+   delete playerPosList;
 }
 
 
 
 
-void Player::getPlayerPos(objPos &returnPos)
+objPosArrayList* Player::getPlayerPos()
 {
    // return the reference to the playerPos arrray list
-   returnPos.setObjPos(playerPos.x,playerPos.y,playerPos.symbol);
+   //returnPos.setObjPos(playerPos.x,playerPos.y,playerPos.symbol);
+
+   return playerPosList;
 }
 
 
@@ -107,31 +121,33 @@ void Player::movePlayer()
    // PPA3 Finite State Machine logic
    int x = mainGameMechsRef->getBoardSizeX();
    int y = mainGameMechsRef->getBoardSizeY();
+   objPos currHead;
+   playerPosList->getHeadElement(currHead);
 
 
    switch(myDir)
    {
        case UP:
-           playerPos.y--;
-           if (playerPos.y <= 0)
+           currHead.y--;
+           if (currHead.y <= 0)
            {
-               playerPos.y = y -2;
+               currHead.y = y -2;
            }
            break;
      
      
        case LEFT:
-           playerPos.x--;
-           if (playerPos.x <= 0)
+           currHead.x--;
+           if (currHead.x <= 0)
            {
-               playerPos.x = x -2;
+               currHead.x = x -2;
            }
            break;
        case DOWN:
-           playerPos.y++;
-           if (playerPos.y >= y -1)
+           currHead.y++;
+           if (currHead.y >= y -1)
            {
-               playerPos.y = 1;
+               currHead.y = 1;
            }
            break;
 
@@ -139,15 +155,18 @@ void Player::movePlayer()
 
 
        case RIGHT:
-           playerPos.x++;
-           if (playerPos.x >= x -1)
+           currHead.x++;
+           if (currHead.x >= x -1)
            {
-               playerPos.x = 1;
+               currHead.x = 1;
            }
            break;
        default:
            break;
    }
+
+   playerPosList->insertHead(currHead);
+   playerPosList->removeTail();
 
 
 }

@@ -40,16 +40,27 @@ class Player
 
 
 
-       void getPlayerPos(objPos &returnPos); // Upgrade this in iteration 3.
+       objPosArrayList* getPlayerPos(); // Upgrade this in iteration 3.
        void updatePlayerDir();
-       void movePlayer();
+       void movePlayer(); //need more actions in here:
+       //after inserting the head but before removing the tail 
+       //-check if new head position collides with food
+       //-if yes, increment the score in GM, generate new food, and do not remove tail
+       //otherwise, remove tail and move on
 
 
+    //Lastly, add self collision check
+    //-if self-collided 
+    //set loseFlag and exitFlag both to true (through GM)
 
+    //-if ending, you need to differntiate the end game state
+    //LOST - display LOST message
+    //otherwise, display ENDGAME message only
 
    private:
-       objPos playerPos;   // Upgrade this in iteration 3.      
+       objPosArrayList *playerPosList;   // Upgrade this in iteration 3.      
        enum Dir myDir;
+
 
 
 
@@ -62,49 +73,3 @@ class Player
 
 
 #endif
-
-
-objPos.h 
-
-#ifndef OBJPOS_H
-#define OBJPOS_H
-
-
-
-
-class objPos
-{
-   public:
-       int x;
-       int y;
-       char symbol;
-
-
-
-
-       objPos();
-       objPos(objPos &o); // copy constructor
-       objPos(int xPos, int yPos, char sym);
-
-
-
-
-       void setObjPos(objPos o);      
-       void setObjPos(int xPos, int yPos, char sym);
-       void getObjPos(objPos &returnPos);
-       char getSymbol();
-
-
-
-
-       bool isPosEqual(const objPos* refPos);
-     
-       char getSymbolIfPosEqual(const objPos* refPos);
-};
-
-
-
-
-#endif
-
-

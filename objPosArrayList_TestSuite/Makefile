@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=-I. -lm -g
 DEPS = *.h
 OBJ = objPos.o objPosArrayList.o Test.o
-POSTLINKER = -lncurses   ## uncomment this if on Linux
+##POSTLINKER = -lncurses   ## uncomment this if on Linux
 
 %.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
